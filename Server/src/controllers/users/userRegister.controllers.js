@@ -1,14 +1,10 @@
 import { User } from "../../models/user.models.js";
 import bcrypt from "bcryptjs";
 import { createToken } from "../../utils/index.js";
-import {
-  passwordStrength,
-  verifyEmail,
-  verifyString,
-} from "../../utils/index.js";
+import { passwordStrength, verifyEmail } from "../../utils/index.js";
 const registerUser = async (req, res) => {
   try {
-    const { email, password, username } = req.body;
+    const { email, password } = req.body;
     if (!verifyEmail(email).success) {
       return res.status(400).json({
         success: false,
@@ -22,12 +18,6 @@ const registerUser = async (req, res) => {
       });
     }
 
-    if (!verifyString(username).success) {
-      return res.status(400).json({
-        success: false,
-        message: "username is invlaid",
-      });
-    }
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       return res.status(400).json({
@@ -40,10 +30,8 @@ const registerUser = async (req, res) => {
     const newUser = await User.create({
       email,
       password: hashedPswd,
-      username,
-      avatar: avatar.url,
     });
-    const token = createToken({ email, _id: newUser._id, username });
+    const token = createToken({ email, _id: newUser._id });
     res.status(200).json({
       success: true,
       message: "User created successfully",

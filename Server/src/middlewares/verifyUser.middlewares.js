@@ -1,4 +1,3 @@
-import { User } from "../models/user.models.js";
 import jwt from "jsonwebtoken";
 const authMiddleware = (req, res, next) => {
   try {
@@ -11,7 +10,7 @@ const authMiddleware = (req, res, next) => {
       });
     }
     const decodedToken = jwt.verify(token, process.env.SECRET_KEY);
-    req.user = decodedToken;
+    req.user = decodedToken.existingUser;
     next();
   } catch (error) {
     console.log(error);
