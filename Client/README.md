@@ -4,4 +4,5 @@
 
 - vite react ecosystem
 - react-router-dom
--
+- sonner - for toasts
+- react-calendar for calendar
