@@ -4,7 +4,7 @@ import { createToken } from "../../utils/index.js";
 import { passwordStrength, verifyEmail } from "../../utils/index.js";
 const registerUser = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { email, password, name } = req.body;
     if (!verifyEmail(email).success) {
       return res.status(400).json({
         success: false,
@@ -15,6 +15,13 @@ const registerUser = async (req, res) => {
       return res.status(400).json({
         success: false,
         message: "choose a stronger password",
+      });
+    }
+
+    if (!name) {
+      return res.status(400).json({
+        success: false,
+        message: "Name is required",
       });
     }
 
@@ -30,6 +37,7 @@ const registerUser = async (req, res) => {
     const newUser = await User.create({
       email,
       password: hashedPswd,
+      name,
     });
     const token = createToken({ email, _id: newUser._id });
     res.status(200).json({

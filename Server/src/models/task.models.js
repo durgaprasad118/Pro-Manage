@@ -2,7 +2,6 @@ import mongoose from "mongoose";
 const taskSchema = new mongoose.Schema(
   {
     title: String,
-    date: Date,
     completed: {
       type: Boolean,
       default: false,

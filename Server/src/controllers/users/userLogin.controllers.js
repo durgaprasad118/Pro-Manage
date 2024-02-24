@@ -29,7 +29,7 @@ const loginUser = async (req, res) => {
     }
     const passwordCompare = await bcrypt.compare(
       password,
-      existingUser.password,
+      existingUser.password
     );
     if (!passwordCompare) {
       return res.status(400).json({
