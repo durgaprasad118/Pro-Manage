@@ -1,7 +1,6 @@
 import { User } from "../../models/user.models.js";
 import bcrypt from "bcryptjs";
-import { createToken } from "../../utils/index.js";
-import { passwordStrength, verifyEmail } from "../../utils/index.js";
+import { verifyEmail } from "../../utils/index.js";
 const registerUser = async (req, res) => {
   try {
     const { email, password, name } = req.body;
@@ -11,7 +10,7 @@ const registerUser = async (req, res) => {
         message: "invalid email",
       });
     }
-    if (!passwordStrength(password).success) {
+    if (!password) {
       return res.status(400).json({
         success: false,
         message: "choose a stronger password",
@@ -39,11 +38,10 @@ const registerUser = async (req, res) => {
       password: hashedPswd,
       name,
     });
-    const token = createToken({ email, _id: newUser._id });
     res.status(200).json({
       success: true,
       message: "User created successfully",
-      token: token,
+      user: newUser,
     });
   } catch (error) {
     console.log(error);

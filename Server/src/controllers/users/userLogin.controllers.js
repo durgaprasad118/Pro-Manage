@@ -37,7 +37,16 @@ const loginUser = async (req, res) => {
         message: "Invlaid password",
       });
     }
-    const token = createToken({ existingUser });
+    const token = createToken({
+      _id: existingUser._id,
+      email: existingUser.email,
+    });
+    res.cookie("token", token, {
+      path: "/",
+      expires: new Date(Date.now() + 1000 * 60 * 60 * 24),
+      httpOnly: true,
+      sameSite: "lax",
+    });
     res.status(200).json({
       success: true,
       message: "User loggedin  successfully",
