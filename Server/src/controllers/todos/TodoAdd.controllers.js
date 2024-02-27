@@ -8,7 +8,7 @@ const addTodo = async (req, res) => {
       priority,
       label,
       date,
-      tasks: tasks.map((task) => ({
+      task: tasks.map((task) => ({
         title: task.title,
         completed: task.completed,
       })),

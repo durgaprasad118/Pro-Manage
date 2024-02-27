@@ -28,24 +28,23 @@ const updateProfile = async (req, res) => {
           message: "Invalid current password",
         });
       }
-      if (!passwordStrength(newPassword).success) {
-        return res.status(400).json({
-          success: false,
-          message: "Choose a stronger new password",
-        });
-      }
       const hashedNewPassword = await bcrypt.hash(newPassword, 10);
       user.password = hashedNewPassword;
     }
 
     await user.save();
-
     const token = createToken({ email: user.email, _id: user._id });
-
+    res.cookie("token", token, {
+      path: "/",
+      expires: new Date(Date.now() + 1000 * 60 * 60 * 24),
+      httpOnly: true,
+      sameSite: "lax",
+    });
     res.status(200).json({
       success: true,
       message: "Profile updated successfully",
-      token,
+      userName: user.name,
+      token: token,
     });
   } catch (error) {
     console.error(error);

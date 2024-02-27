@@ -1,10 +1,7 @@
 import { User } from "../../models/user.models.js";
 import bcrypt from "bcryptjs";
 import { createToken } from "../../utils/index.js";
-import {
-  passwordStrength,
-  verifyEmail,
-} from "../../utils/verification.utils.js";
+import { verifyEmail } from "../../utils/verification.utils.js";
 const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -14,10 +11,10 @@ const loginUser = async (req, res) => {
         message: "invalid email",
       });
     }
-    if (!passwordStrength(password).success) {
+    if (!password) {
       return res.status(400).json({
         success: false,
-        message: "This passowrd is too weak!!",
+        message: "Password feild is mandatory",
       });
     }
     const existingUser = await User.findOne({ email });
@@ -50,8 +47,8 @@ const loginUser = async (req, res) => {
     res.status(200).json({
       success: true,
       message: "User loggedin  successfully",
+      userName: existingUser.name,
       token: token,
-      userId: existingUser._id,
     });
   } catch (error) {
     console.log(error);
