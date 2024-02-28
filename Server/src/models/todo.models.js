@@ -5,7 +5,7 @@ const todoSchema = new mongoose.Schema(
     title: String,
     priority: {
       type: String,
-      enum: ["high", "medium", "low"],
+      enum: ["HIGH", "MODERATE", "LOW"],
     },
     user: {
       type: mongoose.Schema.Types.ObjectId,
