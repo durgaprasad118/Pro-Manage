@@ -16,7 +16,7 @@ const EditShareModal = ({ setVisible, setIsDl, closeDots, _id }) => {
     closeDots();
   }
   const copyUrlToClipboard = () => {
-    const currentUrl = `http://localhost:5173/share/${_id}`;
+    const currentUrl = `https://pro-manage-kohl.vercel.app//share/${_id}`;
     if (navigator.clipboard) {
       navigator.clipboard
         .writeText(currentUrl)
