@@ -1,3 +1,4 @@
+export { updateCheck } from "./TodoCheckUpdate.controllers.js";
 export { analyticsData } from "./TodoAnalytics.controllers.js";
 export { ShareTodo } from "./TodoShare.contollers.js";
 export { filterTodosByDate } from "./TodoListFilter.controllers.js";

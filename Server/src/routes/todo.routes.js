@@ -8,6 +8,7 @@ import {
   getParticularTodo,
   filterTodosByDate,
   analyticsData,
+  updateCheck,
 } from "../controllers/todos/index.js";
 const router = Router();
 router.get("/", getAllTodos);
@@ -18,4 +19,5 @@ router.put("/label/:id", labelCreate);
 router.get("/particular/:id", getParticularTodo);
 router.get("/filter/:filterType", filterTodosByDate);
 router.get("/analytics/:filterType", analyticsData);
+router.put("/checkupdate/:id", updateCheck);
 export default router;
