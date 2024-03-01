@@ -1,5 +1,5 @@
 import { Todos } from "../../models/todo.models.js";
-const filterTodosByLabel = async (req, res) => {
+const doneLabel = async (req, res) => {
   try {
     const userId = req.user._id;
     const label = req.params.label;
@@ -18,4 +18,4 @@ const filterTodosByLabel = async (req, res) => {
   }
 };
 
-export { filterTodosByLabel };
+export { doneLabel };

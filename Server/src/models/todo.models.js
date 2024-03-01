@@ -16,7 +16,7 @@ const todoSchema = new mongoose.Schema(
     date: Date,
     label: {
       type: String,
-      enum: ["progress", "todo", "done"],
+      enum: ["PROGRESS", "TO-DO", "DONE", "BACKLOG"],
     },
   },
   {

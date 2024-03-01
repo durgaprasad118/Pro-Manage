@@ -11,6 +11,8 @@ app.use(cors());
 import authMiddleware from "./middlewares/verifyUser.middlewares.js";
 import userRouter from "./routes/user.routes.js";
 import todoRouter from "./routes/todo.routes.js";
+import { ShareTodo } from "./controllers/todos/TodoShare.contollers.js";
 app.use("/users", userRouter);
 app.use("/todos", authMiddleware, todoRouter);
+app.use("/share/:id", ShareTodo);
 export { app };
