@@ -12,11 +12,8 @@ connectDB()
     console.log(er);
   });
 
-app.get("/dp", (req, res) => {
+app.get("/", (req, res) => {
   res.status(200).json({
     message: "hello there",
   });
 });
-// app.listen(process.env.PORT || 4000, () => {
-//   console.log(`app is running on ${process.env.PORT || 4000}`);
-// });
