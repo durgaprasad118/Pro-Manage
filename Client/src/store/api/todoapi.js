@@ -51,6 +51,15 @@ export const TaskApi = createApi({
       }),
       invalidatesTags: ["todos", "particularTodo", "filter", "share"],
     }),
+
+    editCheck: builder.mutation({
+      query: (data) => ({
+        url: `todos/checkupdate/${data.taskId}`,
+        method: "PUT",
+        body: data,
+      }),
+      invalidatesTags: ["todos", "particularTodo", "filter", "share"],
+    }),
     deleteTodo: builder.mutation({
       query: (data) => ({
         url: `todos/delete/${data}`,
@@ -69,4 +78,5 @@ export const {
   useParticularTodoQuery,
   useEditTodoMutation,
   useDeleteTodoMutation,
+  useEditCheckMutation,
 } = TaskApi;
