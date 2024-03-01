@@ -1,26 +1,26 @@
-import { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { Cardholder, Dropdown } from '../../components'
-import { useGetDateFilterQuery } from '../../store/api/todoapi'
-import { DateToday } from '../../utils/date'
-import './Board.css'
-import { setFlter } from '../../store/slices/filterSlice'
-import { setAnalytics } from '../../store/slices/taskSlice'
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Cardholder, Dropdown } from "../../components";
+import { useGetDateFilterQuery } from "../../store/api/todoapi";
+import { DateToday } from "../../utils/date";
+import "./Board.css";
+import { setFlter } from "../../store/slices/filterSlice";
+import { setAnalytics } from "../../store/slices/taskSlice";
 const BoardPage = () => {
-  const inital = useSelector((state) => state.fil.fil.filterType)
-  const [filter, setFilter] = useState(inital)
-  const dispatch = useDispatch()
+  const inital = useSelector((state) => state.fil.fil.filterType);
+  const [filter, setFilter] = useState(inital);
+  const dispatch = useDispatch();
   const {
     userInfo: { userName },
-  } = useSelector((state) => state.auth)
-  const { data, refetch, isSuccess } = useGetDateFilterQuery(filter)
+  } = useSelector((state) => state.auth);
+  const { data, refetch, isSuccess } = useGetDateFilterQuery(filter);
   useEffect(() => {
-    refetch()
-  }, [])
+    refetch();
+  }, []);
   if (isSuccess) {
-    dispatch(setFlter(filter))
+    dispatch(setFlter(filter));
     console.log(data);
-    dispatch(setAnalytics(data?.lengths))
+    dispatch(setAnalytics(data?.lengths));
   }
 
   return (
@@ -62,7 +62,7 @@ const BoardPage = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default BoardPage
+export default BoardPage;

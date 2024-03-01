@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const userApiSlice = createApi({
   reducerPath: "userapi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:9089/",
+    baseUrl: "https://pro-manage-46mq.onrender.com/",
   }),
   tagTypes: ["User"],
   endpoints: (builder) => ({

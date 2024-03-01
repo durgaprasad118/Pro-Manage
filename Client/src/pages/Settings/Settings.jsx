@@ -1,39 +1,39 @@
-import { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { toast } from 'sonner'
-import { LoginInput, PasswordInput, RegisterButton } from '../../components'
-import { useUpdateUserDetailsMutation } from '../../store/api/userProtectedApi'
-import './Settings.css'
-import { setCredentials } from '../../store/slices/authSlice'
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "sonner";
+import { LoginInput, PasswordInput, RegisterButton } from "../../components";
+import { useUpdateUserDetailsMutation } from "../../store/api/userProtectedApi";
+import "./Settings.css";
+import { setCredentials } from "../../store/slices/authSlice";
 const SettingsPage = () => {
   const {
     userInfo: { userName },
-  } = useSelector((state) => state.auth)
+  } = useSelector((state) => state.auth);
 
   const [inputVal, setInputVal] = useState({
     name: userName,
-    Oldpassword: '',
-    newPassword: '',
-  })
-  const dispatch = useDispatch()
-  const [detailsUpdate] = useUpdateUserDetailsMutation()
+    Oldpassword: "",
+    newPassword: "",
+  });
+  const dispatch = useDispatch();
+  const [detailsUpdate] = useUpdateUserDetailsMutation();
   const submitHandler = async () => {
     try {
       const result = await detailsUpdate({
         name: inputVal.name,
         currentPassword: inputVal.Oldpassword,
         newPassword: inputVal.newPassword,
-      })
+      });
       if (result.error) {
-        return toast.error(`${result.error.data.message}`)
+        return toast.error(`${result.error.data.message}`);
       }
-      dispatch(setCredentials(result.data))
+      dispatch(setCredentials(result.data));
 
-      toast.success('Profile updated successfully')
+      toast.success("Profile updated successfully");
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
   return (
     <div className="set-container headd">
       <h3>Settings</h3>
@@ -71,7 +71,7 @@ const SettingsPage = () => {
         bg="#17A2B8"
       />
     </div>
-  )
-}
+  );
+};
 
-export default SettingsPage
+export default SettingsPage;

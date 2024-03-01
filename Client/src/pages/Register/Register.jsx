@@ -1,46 +1,46 @@
-import { useState } from 'react'
+import { useState } from "react";
 import {
   LoginInput,
   PasswordInput,
   RegisterButton,
   Welcome,
-} from '../../components'
-import './Register.css'
-import { toast } from 'sonner'
-import { useRegisterMutation } from '../../store/api/api'
-import { useNavigate, Link } from 'react-router-dom'
+} from "../../components";
+import "./Register.css";
+import { toast } from "sonner";
+import { useRegisterMutation } from "../../store/api/api";
+import { useNavigate, Link } from "react-router-dom";
 const Register = () => {
   const [inputVal, setInputVal] = useState({
-    name: '',
-    email: '',
-    password: '',
-    cnfpwd: '',
-  })
+    name: "",
+    email: "",
+    password: "",
+    cnfpwd: "",
+  });
 
-  const navigate = useNavigate()
-  const [register, { isLoading, isError, error }] = useRegisterMutation()
+  const navigate = useNavigate();
+  const [register, { isLoading, isError, error }] = useRegisterMutation();
   const submitHandler = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     try {
       if (inputVal.password !== inputVal.cnfpwd) {
-        toast.error('Password not matched')
+        toast.error("Password not matched");
       } else {
         const result = await register({
           name: inputVal.name,
           email: inputVal.email,
           password: inputVal.password,
-        })
+        });
         if (result.error) {
-          toast.error(result.error.data.message)
+          toast.error(result.error.data.message);
         } else {
-          navigate('/login')
-          toast.success('Successfully registered, login Now')
+          navigate("/login");
+          toast.success("Successfully registered, login Now");
         }
       }
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
   return (
     <div className="dash-container">
       <Welcome />
@@ -89,10 +89,7 @@ const Register = () => {
             bg="#17A2B8"
           />
           <p className="noLogin-text">Have no account yet?</p>
-          <Link
-            style={{ textDecoration: 'none' }}
-            to={'/login'}
-          >
+          <Link style={{ textDecoration: "none" }} to={"/login"}>
             <RegisterButton
               text="login"
               color="#17A2B8"
@@ -103,7 +100,7 @@ const Register = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Register
+export default Register;

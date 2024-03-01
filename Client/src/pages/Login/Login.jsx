@@ -1,20 +1,19 @@
-import { useState } from 'react'
-import { useDispatch } from 'react-redux'
-import { Link, useNavigate } from 'react-router-dom'
-import { toast } from 'sonner'
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 import {
   LoginInput,
   PasswordInput,
   RegisterButton,
   Welcome,
-} from '../../components'
-import { useLoginMutation } from '../../store/api/api'
-import { setCredentials } from '../../store/slices/authSlice'
-import './Login.css'
-import { setFlter } from '../../store/slices/filterSlice'
-import { setAnalytics } from '../../store/slices/taskSlice'
+} from "../../components";
+import { useLoginMutation } from "../../store/api/api";
+import { setCredentials } from "../../store/slices/authSlice";
+import "./Login.css";
+import { setFlter } from "../../store/slices/filterSlice";
+import { setAnalytics } from "../../store/slices/taskSlice";
 const Login = () => {
-
   const [isHovered, setIsHovered] = useState(false);
 
   const handleMouseOver = () => {
@@ -25,33 +24,31 @@ const Login = () => {
     setIsHovered(false);
   };
 
-
-
   const [loginInput, setLoginInput] = useState({
-    email: '',
-    password: '',
-  })
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
-  const [login, { isLoading }] = useLoginMutation()
+    email: "",
+    password: "",
+  });
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [login, { isLoading }] = useLoginMutation();
   const submitHandler = async () => {
     try {
       const response = await login({
         email: loginInput.email,
         password: loginInput.password,
-      })
+      });
       if (response.error) {
-        return toast.error(`${response.error.data.message}`)
+        return toast.error(`${response.error.data.message}`);
       }
-      dispatch(setCredentials(response.data))
-      dispatch(setFlter("week"))
-      toast.success('Logged in successfully')
-      navigate('/')
-      window.location.href = '/'
+      dispatch(setCredentials(response.data));
+      dispatch(setFlter("week"));
+      toast.success("Logged in successfully");
+      navigate("/dash/dash");
+      window.location.href = "/dash/dash";
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
   return (
     <div className="dash-container">
       <Welcome />
@@ -85,10 +82,7 @@ const Login = () => {
             hovercolor="#ffffff"
           />
           <p className="noLogin-text">Have no account yet?</p>
-          <Link
-            style={{ textDecoration: 'none' }}
-            to={'/register'}
-          >
+          <Link style={{ textDecoration: "none" }} to={"/"}>
             <RegisterButton
               text="register"
               color="#17A2B8"
@@ -100,7 +94,7 @@ const Login = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;
