@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
 import {
@@ -41,11 +41,6 @@ const Register = () => {
             console.log(error);
         }
     };
-    useEffect(() => {
-        toast.info(
-            "For the first request kindly wait for 2 mins, cz I'm using free plan of render "
-        );
-    }, []);
     return (
         <div className="dash-container">
             <Welcome />
